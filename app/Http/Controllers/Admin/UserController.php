@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
+        $this->authorize('index',new User);
         $q = request()->input('q');
         if($q)
         {
@@ -25,6 +26,7 @@ class UserController extends Controller
     }
 
     public function create(){
+        $this->authorize('create',new User);
         $roles1 =  Role::where('id','<=',5)->pluck('name','id')->toArray();
         $roles1[''] = '-----------Choose Your Role-----------';
         $roles2 =  Role::where('id','>',5)->pluck('name','id')->toArray();
@@ -56,6 +58,7 @@ class UserController extends Controller
     }
 
     public function edit(User $user){
+        $this->authorize('edit',new User);
         $roles1 =  Role::where('id','<=',5)->pluck('name','id')->toArray();
         $roles1[''] = '-----------Choose Your Role-----------';
         $roles2 =  Role::where('id','>',5)->pluck('name','id')->toArray();

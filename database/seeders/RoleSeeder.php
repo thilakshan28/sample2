@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Role;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+
 
 class RoleSeeder extends Seeder
 {
@@ -15,45 +16,50 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Admin',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Treasurer',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Editor',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Publisher',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Writer',
+            'permission'  => ([
+                "App\\Models\\User" => [
+                  'index',
+                   'edit'
+                ]
+             ]),
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Teacher',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
 
-        DB::table('roles')->insert([
+        Role::create([
             'name' => 'Student',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s')
