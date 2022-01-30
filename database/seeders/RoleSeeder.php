@@ -43,7 +43,7 @@ class RoleSeeder extends Seeder
         Role::create([
             'name' => 'Writer',
             'permission'  => ([
-                "App\\Models\\User" => [
+                "App\\Models\\User" => [ 
                   'index',
                    'edit'
                 ]

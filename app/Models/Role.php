@@ -9,8 +9,9 @@ class Role extends Model
 {
     protected $fillable = ['name','permission'];
 
-    protected $casts = ['permission' => 'array'];
 
+ protected $casts = ['permission' => 'array'];
+ 
     public function users(){
         return $this->hasMany(User::class,'role_id');
     }

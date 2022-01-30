@@ -21,6 +21,7 @@
     </div>
   </div>
 @else
+{!! Form::text('user_id', 'ID') !!}
 {!! Form::text('name', 'Name') !!}
 {!! Form::text('email', 'E-Mail')->type('email') !!}
 {!! Form::select('department', 'Department')->options([''=>'----Chhose Your Department----','Blog' => 'Blog','Education' =>'Education']) !!}
@@ -68,10 +69,27 @@ $(document).ready(function () {
     });
 
     @if(isset($user))
+    var values =@json($user);
+    var type="{{$type}}";
+        setIdValue(values,type);
         var existingRoleId = "{{ $user->role_id }}";
         var existingDepartment = "{{ $user->department }}";
-        roleChange(existingDepartment,existingRoleId);
     @endif
+
+    function setIdValue(values,type){
+                var ids=values.userids;
+                if(ids[0]!=null){
+                    $.each(ids,function(key,value){
+                        if(ids[key].type=="dental" && type=="dental"){
+                            var dental=ids[key].clinic_id;
+                            $("#inp-user_id").val(dental);
+                        }else if(ids[key].type=="general" && type=="general"){
+                            var general=ids[key].clinic_id;
+                            $("#inp-user_id").val(general);
+                        }
+                    })
+                }
+            }
 
     $(window).on('load', function() {
         $('#myModal').modal('show');

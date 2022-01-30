@@ -121,6 +121,7 @@
                                 <a href="{{ route('post.edit',$post->id)}}" class="btn btn-info btn-icon-split"><span class="text">Edit</span></a>
                                 <a href="{{ route('post.delete',$post->id)}}" class="btn btn-info btn-icon-split"><span class="text">Delete</span></a>
                             </td>
+                        </tr>
                         @endforeach
                         </tbody>
                     </table>

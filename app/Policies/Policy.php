@@ -67,7 +67,7 @@ class Policy
         }
 
         $permissions = $this->getPermissions($user);
-       //dd($permissions);
+       dd($permissions);
         if (isset($permissions[$class]) && is_array($permissions[$class]) && in_array($func, $permissions[$class])) {
             $this->check = true;
 

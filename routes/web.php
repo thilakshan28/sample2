@@ -23,6 +23,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth', 'namespace' => 'A
 Route::group(['prefix' => 'posts',], function () {
     Route::get('/', 'PostController@index')->name('post.index');
     Route::get('/create','PostController@create')->name('post.create');
+    Route::get('ajaxRequest','PostController@dropdown')->name('get.district');
     Route::post('/store','PostController@store')->name('post.store');
 
     Route::group(['prefix' => '{post}'], function () {

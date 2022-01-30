@@ -60,4 +60,12 @@ class User extends Authenticatable
     public function getPostCountAttribute(){
         return $this->posts()->count();
     }
+
+    public function userids(){                             // create post
+        return $this->hasMany(UserId::class,'user_id');
+    }
+
+    public function event(){
+        return $this->belongsTo(Event::class,'event_id');
+    }
 }
