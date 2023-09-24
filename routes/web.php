@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,7 @@ Route::get('/', function () {
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth', 'namespace' => 'Admin'], function () {
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
-Route::group(['prefix' => 'posts',], function () {
+Route::group(['prefix' => 'posts'], function () {
     Route::get('/', 'PostController@index')->name('post.index');
     Route::get('/create','PostController@create')->name('post.create');
     Route::get('ajaxRequest','PostController@dropdown')->name('get.district');
@@ -29,6 +30,8 @@ Route::group(['prefix' => 'posts',], function () {
     Route::group(['prefix' => '{post}'], function () {
     Route::post('/comments','CommentController@store')->name('comment.store');
     Route::get('/show','PostController@show')->name('post.show');
+
+
     Route::get('/edit','PostController@edit')->name('post.edit');
     Route::patch('/','Postcontroller@update')->name('post.update');
     Route::get('/delete','PostController@delete')->name('post.delete');

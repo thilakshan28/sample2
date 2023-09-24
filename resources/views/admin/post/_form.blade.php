@@ -11,20 +11,21 @@
 {!! Form::text('title', 'Title') !!}
 
 {!! Form::text('content', 'Content') !!}
-
+<!--
 <div class="form-group">
     <label for="province">Province:</label>
  <select id="province" name="province" class="form-control">
       <option value="" selected disabled>Select Province</option>
-       @foreach($provinces as $province)
-       <option value="{{$province->id}}"> {{$province->name}}</option>
-       @endforeach
+       foreach($provinces as $province)
+       <option value="$province->id}}"> $province->name}}</option>
+       endforeach
        </select>
-  </div>
-<div class="form-group">
+  </div>--->
+  {!!Form::file('file', 'Document')!!}
+<!---<div class="form-group">
     <label for="district">District:</label>
     <select name="district" id="district" class="form-control"></select>
-  </div>
+  </div>--->
 
 
   @section('js')

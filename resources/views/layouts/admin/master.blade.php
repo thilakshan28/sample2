@@ -10,17 +10,10 @@
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-        @switch(Auth::user()->role->name)
-            @case('Admin')
+
                 @include('layouts.admin.sidebar._adminsidebar')
-                @break
-            @case('Publisher')
-                @include('layouts.admin.sidebar._publishersidebar')
-                @break
-            @case('Writer')
-                @include('layouts.admin.sidebar._writersidebar')
-                @break
-        @endswitch
+
+            
     <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
     <!-- Main Content -->

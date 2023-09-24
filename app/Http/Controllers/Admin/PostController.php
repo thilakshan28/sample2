@@ -8,21 +8,23 @@ use App\Http\Requests\Admin\PostUpdateRequest;
 use App\Models\District;
 use App\Models\Post;
 use App\Models\Province;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Response;
 
 class PostController extends Controller
 {
   public function index(){
 
-      $posts = Post::with('user','usercomments')->orderBy('id', 'desc')->paginate(12);
+      $posts = Post::all();
       return view('admin.post.index',compact('posts'));
   }
 
   public function create(){
-    $provinces = Province::all();
-    return view('admin.post.create',compact('provinces'));
+    //$provinces = Province::all();
+    return view('admin.post.create');
     }
 
     public function dropdown(Request $request){
@@ -31,19 +33,34 @@ class PostController extends Controller
     }
 
     public function store(PostStoreRequest $request){
+
         $data = $request->validated();
+        $file = $request->file('file');
+        $name = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+
         $user=Auth::user()->id;
-        Post::create([
+
+        if($request->has('file')){
+            $path=$request->file('file')->store('notes','public');
+
+        }
+         $post=Post::create([
             'user_id' => $user ,
             'title' => $data['title'],
             'content' => $data['content'],
+            'filename' => $path,
+            'actual_filename' => $name,
         ]);
 
         return redirect()->route('post.index')->with('success', 'Post has been created successfuly!');
     }
 
     public function show(Post $post){
-        return view('admin.post.show',compact('post'));
+
+        $pathToFile = storage_path('app/notes/' . $post->filename);
+        //return response()->download($pathToFile,$post->actual_filename);
+        return response()->file($pathToFile,['Content-Type', 'application/pptx']);
     }
 
     public function edit(Post $post){

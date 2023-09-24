@@ -26,6 +26,7 @@ class CommentController extends Controller
     }
 
     public function store(Post $post){
+        dd($post);
         $q = request()->input('q');
         $user_id = Auth::user()->id;
             $post->usercomments()->attach([$post->id=>['user_id'=>$user_id,'comment'=>$q]]);

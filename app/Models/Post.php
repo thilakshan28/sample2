@@ -11,6 +11,8 @@ class Post extends Model
         'title',
         'content',
         'user_id',
+        'filename',
+        'actual_filename'
     ];
     public function user(){                                   // create post
         return $this->belongsTo(User::class,'user_id');
